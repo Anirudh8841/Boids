@@ -1,0 +1,83 @@
+\hypertarget{class_flock}{}\section{Flock Class Reference}
+\label{class_flock}\index{Flock@{Flock}}
+
+
+Class for \mbox{\hyperlink{class_flock}{Flock}}.  
+
+
+
+
+{\ttfamily \#include $<$flock.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_flock_a73c8fbefc577353667562477b7bbe878}{add\+Boid}} ()
+\item 
+int \mbox{\hyperlink{class_flock_a7d6cbb42cc06cf8d0995f4a9113b79c6}{size\+Of\+Flock}} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_boids}{Boids}} $\ast$ $>$ \mbox{\hyperlink{class_flock_a2a8a301e32d7ba53250c760b0a586fd9}{boid\+\_\+list}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_obstacle}{Obstacle}} $\ast$ $>$ \mbox{\hyperlink{class_flock_a3119c5a155c620f89111b7d6e1121b9f}{obs\+\_\+list}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class for \mbox{\hyperlink{class_flock}{Flock}}. 
+
+The class \mbox{\hyperlink{class_flock}{Flock}} consists of boids list and obstacles list. ~\newline
+It represents the attributes of the flock of boids. It has two methods addboid and sizeof\+Flock. These methods are used to add a boid to flock and get the size of flock respectively. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_flock_a73c8fbefc577353667562477b7bbe878}\label{class_flock_a73c8fbefc577353667562477b7bbe878}} 
+\index{Flock@{Flock}!add\+Boid@{add\+Boid}}
+\index{add\+Boid@{add\+Boid}!Flock@{Flock}}
+\subsubsection{\texorpdfstring{add\+Boid()}{addBoid()}}
+{\footnotesize\ttfamily void Flock\+::add\+Boid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+This function is used to add a boid to flock 
+\begin{DoxyParams}{Parameters}
+{\em no} & parameters required \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+creates and adds a new boid to the boids list 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_flock_a7d6cbb42cc06cf8d0995f4a9113b79c6}\label{class_flock_a7d6cbb42cc06cf8d0995f4a9113b79c6}} 
+\index{Flock@{Flock}!size\+Of\+Flock@{size\+Of\+Flock}}
+\index{size\+Of\+Flock@{size\+Of\+Flock}!Flock@{Flock}}
+\subsubsection{\texorpdfstring{size\+Of\+Flock()}{sizeOfFlock()}}
+{\footnotesize\ttfamily int Flock\+::size\+Of\+Flock (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+This method is used to query for the number of boids in flock 
+\begin{DoxyParams}{Parameters}
+{\em no} & parameters required \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+returns an int which tells us the number of boids 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_flock_a2a8a301e32d7ba53250c760b0a586fd9}\label{class_flock_a2a8a301e32d7ba53250c760b0a586fd9}} 
+\index{Flock@{Flock}!boid\+\_\+list@{boid\+\_\+list}}
+\index{boid\+\_\+list@{boid\+\_\+list}!Flock@{Flock}}
+\subsubsection{\texorpdfstring{boid\+\_\+list}{boid\_list}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{class_boids}{Boids}} $\ast$$>$ Flock\+::boid\+\_\+list}
+
+boid\+\_\+list stored in a vector \mbox{\Hypertarget{class_flock_a3119c5a155c620f89111b7d6e1121b9f}\label{class_flock_a3119c5a155c620f89111b7d6e1121b9f}} 
+\index{Flock@{Flock}!obs\+\_\+list@{obs\+\_\+list}}
+\index{obs\+\_\+list@{obs\+\_\+list}!Flock@{Flock}}
+\subsubsection{\texorpdfstring{obs\+\_\+list}{obs\_list}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{class_obstacle}{Obstacle}} $\ast$$>$ Flock\+::obs\+\_\+list}
+
+obstacle\+\_\+list stored in a vector 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+header/flock.\+h\item 
+src/flock.\+cpp\end{DoxyCompactItemize}
