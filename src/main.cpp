@@ -1,3 +1,35 @@
+/*!
+* \author Kurmapu Venkata Vijaya Sai Prasanth
+* \author Korakoppula Suresh
+* \version 1.0
+* \date 27-04-2018 
+* \warning Some features are yet to be implemented
+* \mainpage Simulation of Boids in 3d space using Opengl
+* \section Functionality Overview
+*   -# Create a boids at random position.
+*   -# Rotate and Scale whole boids space.
+*   -# Boids follow these three rules :-
+*       - Coheshion
+*       - Alignment
+*		- Separation
+* \section Controls
+* \subsection Keyboard_Controls
+*	 -# Q , A - Rotate world space about x axis
+*	 -# W , S - Rotate world space about y axis
+*    -# E , D - Rotate world space about z axis
+*    -# P , L - Scale world space
+*    -# B     - Generate a boid at random position
+*	 -# R	  - Reset the transformations of the world space
+* \section How_To_Run
+* \warning This is only tested in linux
+* \subsection  This project is provided with the makefile 
+*    -# $ make 
+*    -# $ ./boids
+*/
+
+
+
+
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
@@ -11,6 +43,14 @@
 #define RULE2_FACTOR 2
 #define RULE3_FACTOR 30
 
+
+/*! Main method creates a window using glut libraries and 
+* renders a 3D - space for the boids to move .
+* User can use the controls specified to generate the boids and 
+* watch the simulation . The boids follow three rules cohesion ,separation 
+* and alignment 
+* 
+*/
 std::vector<int> closestNeighbours;
 
 Flock*  flock_a = new Flock();
@@ -27,7 +67,10 @@ vector3 tem2  = {0,0,0};
 // for rule three
 vector3 tem3 = {0.0,0.0,0.0};
 
-
+/*! This function is used to simulate the cohesion rule
+* \param an integer which represents the boid number
+* \return doesnot return anything
+*/
 void method1(int i){
 
 	closestNeighbours.clear();
