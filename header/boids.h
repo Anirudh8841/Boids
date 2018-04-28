@@ -14,7 +14,9 @@
 */
 
 struct vector3{
-    float x,y,z;
+    float x; /**< used for representing the x coordinate of space*/
+    float y; /**< used for representing the x coordinate of space*/
+    float z; /**< used for representing the x coordinate of space*/
 };
 
 
