@@ -39,9 +39,9 @@
 #define PI 3.14159265
 #define MAX_DISTANCE 1.5
 #define MIN_DISTANCE 0.2
-#define RULE1_FACTOR 10
+#define RULE1_FACTOR 6
 #define RULE2_FACTOR 2
-#define RULE3_FACTOR 30
+#define RULE3_FACTOR 15
 
 
 /*! Main method creates a window using glut libraries and 
@@ -52,7 +52,7 @@
 * 
 */
 std::vector<int> closestNeighbours;
-
+vector3 origin = {0,0,0};
 Flock*  flock_a = new Flock();
 Flock*  flock_b = new Flock();
 
@@ -321,7 +321,7 @@ void obstacle(){
 	}
 };
 void calculatePositions(float frameTime){
-
+	vector3 change_velo = {0,0,0};
 	for(int i =0;i<flock_a->sizeOfFlock();i++){
 		method1(i);
 		method2(i);
@@ -329,7 +329,9 @@ void calculatePositions(float frameTime){
 		flock_a->boid_list[i]->velocity.x = flock_a->boid_list[i]->velocity.x + tem.x + tem2.x + tem3.x;
 		flock_a->boid_list[i]->velocity.y = flock_a->boid_list[i]->velocity.y + tem.y+ tem2.y + tem3.y;
 		flock_a->boid_list[i]->velocity.z = flock_a->boid_list[i]->velocity.z + tem.z+ tem2.z + tem3.z;
-
+		change_velo.x = change_velo.x + tem.x + tem2.x + tem3.x;
+		change_velo.y = change_velo.y + tem.y + tem2.y + tem3.y;
+		change_velo.z = change_velo.z + tem.z + tem2.z + tem3.z;
 		if((flock_a->boid_list[i]->velocity.x>1)||(flock_a->boid_list[i]->velocity.x<-1)){
 			flock_a->boid_list[i]->velocity.x = flock_a->boid_list[i]->velocity.x/2;
 		}
@@ -352,8 +354,37 @@ void calculatePositions(float frameTime){
 		}
 
 	}
-
-	obstacle();	
+	float ene = 0;
+	float angmom = 0;
+	float force = 0;
+	vector3 moment = {0,0,0};
+	vector3 tempe = {0,0,0};
+	
+	obstacle();
+	// for average energy
+	for(int i = 0;i<flock_a->sizeOfFlock();i++){
+		ene = ene + ((flock_a->boid_list[i]->velocity.x)*(flock_a->boid_list[i]->velocity.x)+(flock_a->boid_list[i]->velocity.y)*(flock_a->boid_list[i]->velocity.y)+(flock_a->boid_list[i]->velocity.z)*(flock_a->boid_list[i]->velocity.z))/2;
+	}
+	
+	// for angular momentum
+	// m r * v
+	for(int i = 0;i<flock_a->sizeOfFlock();i++){
+		tempe = Boids::crossProduct(flock_a->boid_list[i]->position,flock_a->boid_list[i]->velocity);
+		moment.x+=tempe.x;
+		moment.y+=tempe.y;
+		moment.z+=tempe.z;
+	}
+	angmom = Boids::distance(moment,origin);
+	force = Boids::distance(change_velo,origin);
+	if(flock_a->sizeOfFlock()!= 0){
+		angmom = angmom / flock_a->sizeOfFlock();
+		ene = ene / flock_a->sizeOfFlock();
+		force = force / (flock_a->sizeOfFlock()* frameTime);
+		std::cout<< "average energy : "<<ene<<std::endl;	
+		std::cout<< "average momentum : "<<angmom<<std::endl;
+		std::cout<< "average force : "<<force<<std::endl;
+		
+	}
 	for(int i = 0; i<flock_a->sizeOfFlock();i++){
 			flock_a->boid_list[i]->position.x += flock_a->boid_list[i]->velocity.x*frameTime;
 			flock_a->boid_list[i]->position.y += flock_a->boid_list[i]->velocity.y*frameTime;
