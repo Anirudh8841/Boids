@@ -1,0 +1,77 @@
+\documentclass[a4paper]{article}
+
+%% Language and font encodings
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+%% Sets page size and margins
+\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+%% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{hyperref}
+\title{Boids}
+\author{Prasanth \& Suresh}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Boids implementation and mathematical modelling is discussed below. Implementation describes about the defining the
+the rules which boids follow in the flock. Mathematical modelling tells about the mathematics which lies underneath the rules.
+\end{abstract}
+
+\section{Introduction}
+
+Boids is a program which is used to depict the simulation of the flocking of birds in the real life. Careful observation suggests that the real world flocking can be simulated by following certain simple rules (will be discussed in detail) . The efforts are taken to walkthrough the rules to be followed and the mathematics behind it.
+
+\section{Background}
+Boids follow some simple rules to remain in the flock , avoid the obstacles and remain in the boundaries.The simplest implementation of boids require only three rules.The rules which are to be followed are as follows:-
+\begin{enumerate}
+\item Alignment
+\item Cohesion
+\item Separation
+\end{enumerate}
+
+\subsection{Alignment}
+Boids try to change their position so that it corresponds to the average heading of the other nearby boids.
+\subsection{Cohesion}
+Every boid trys to move towards the average heading of the other nearby boids.
+\subsection{Separation}
+Every boid attempts to maintain a reasonable amount of distance between itself and any nearby birds, to prevent overcrowding.
+The implementation of the boids is discussed below.
+\section{Procedure}
+Boid is an object which has a position and velocity. So , in the three dimensional coordinate system it has three coordinates x,y,z. So the position and velocity are the objects of class vec3 - used to represent a 3 coordinate vector. There are certain constants like the minimum separation(MIN\_DISTANCE), and maximum scope(MAX\_DISTANCE) for each boid which suggests the neighbours.There is a flock which is used to represent the collective nature of the boids. So all the boids correspond to a single flock. So if a new boid is generated then it is added to this current flock. There are certain constants like MIN\_VELOCITY and MAX\_VELOCITY which confirms that boids always move some velocity above minimum velocity and also donot cross the maximum velocity.These boids are generated in the certain environment which has boundries. The constants related to these boundaries are window width,height and depth. These boids follow certain rules which are the functions which take some parameters and add the returned result to the velocity of respective boids.In order to increase/ decrease the strength of the some rules.\newline
+The flow of the working is as follows. The boids are instantiated with random velocities at random positions in the space and move along the velocity vector.Between each frame of rendering, the boids follow each rules and the velocities and other attributes of the boid are updated.
+
+\section{Mathematical Modelling}
+The mathematics and the working process is as follows.
+First initialize the boids at random positions ,with random velocity. Assume that the position and velocity vectors of the boid $b_i$ are $p_i$ and $v_i$ respectively .Next apply the rules for each boid. Every rule contributes to a fractional change in the magnitude and direction of velocity of the boid . The rules applied are as follows:-
+\subsection{rule1}
+Inorder to apply the \textbf{alignment} rule, the average of the velocity vectors of the nearby boids will be taken and will be multiplied by a factor which indicates the weight of that rule.Let $b_1$ to $b_i$ boids are near to the present boid , then
+\[rf_1 = \frac{v_1 + v_2 + \cdots + v_i}{i}\]
+
+\subsection{rule2}
+The \textbf{cohesion} rule works as follows. Since the boids try to move towards the average heading of the nearby boids, this depends upon the positions of these nearby boids. So the center of mass of these nearby boids is taken.\newline
+Let $b_1$ to $b_i$ boids are near ot the present boid,then
+\[rf_2 = \frac{p_1 + p_2 + \cdots + p_i}{i}\]
+
+\subsection{rule3}
+In \textbf{separation} rule, the boids try to steer away to avoid crowding. This is done by averaging the difference in the position vectors of the nearby boids with itself.\newline
+Let $b_1$ to $b_i$ boids are near ot the present boid($b_j$),
+\[rf_3 = p_j- \frac{p_1 + p_2 + \cdots + p_i}{i}\]
+\subsection{rule4}
+For applying the boundary conditions, and the minimum , maximum velocity constraints , a small rule factor can be added to the velocity vector of the boid to get it back into the boundaries.
+\subsection{Bringing all together}
+In a similar way , some more rules could be included to achieve more complex movement.Let the contribution by those rules be $rf_i$.\newline
+Inorder to increase or decrease the influence of the rule on the velocity and other attributes of the boid , certain weights are multiplied before it is actually added to the velocity.Let the weights associated with rules be $W_i$.If $b_j$ is the boid with which we are dealing with then,
+\[v_j = v_j + rf_1 * W_1 + rf_2 * W_2 + \cdots + rf_i * W_i \]
+The position can now be foundout by the formula , where frameTime is the time taken between the execution of two consecutive frames.
+\[p_j = p_j + v_j * frameTime\]
+\bibliographystyle{alpha}
+\bibliography{sample}
+[1] \url{https://www.opengl.org/discussion_boards/showthread.php/166981-bouncing-ball}
+\end{document}
