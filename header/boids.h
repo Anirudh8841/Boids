@@ -3,6 +3,7 @@
 #define BOIDS_H
 #include <stdlib.h>
 #include <vector>
+#include <iostream>
 #define WIN_WIDTH  2
 #define WIN_HEIGHT  2
 #define WIN_DEPTH  2
